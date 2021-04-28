@@ -19,15 +19,16 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/").permitAll()
-			.anyRequest().hasRole("USER").and()
+				.antMatchers("/").permitAll()
+				//.antMatchers("/login").permitAll()
+				.anyRequest().hasRole("USER").and()
 			.formLogin()
 				.loginPage("/login")
 				.permitAll()
 				.and()
-				.logout()
-					.logoutUrl("/logout")
-					.permitAll();
+			.logout()
+				.logoutUrl("/logout")
+				.permitAll();
 	}
 
 }
