@@ -26,12 +26,6 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	auth
 		.userDetailsService(userDetailsService)
 		.passwordEncoder(getPasswordEncoder());
-		
-//	auth.inMemoryAuthentication()
-//		.passwordEncoder(getPasswordEncoder())
-//		.withUser("leulsegedyonatan@gmail.com")
-//		.password(getPasswordEncoder().encode("password"))
-//		.roles("USER");
 }
 
 @Override
@@ -39,6 +33,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		http
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
+				.antMatchers("/register").permitAll()
 				.antMatchers("/admin/**").hasAnyRole("ADMIN")
 				.anyRequest().hasRole("USER").and()
 			.formLogin()
